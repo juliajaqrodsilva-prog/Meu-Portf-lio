@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advocacia Rodrigues</title>
+<meta name="description" content="Advocacia Rodrigues: atendimento jurídico com seriedade, clareza e compromisso.">
+
+<style>
+:root {
+  --bg: #f7f5f0;
+  --text: #20332f;
+  --surface: #fffefa;
+  --muted: #6c7771;
+  --primary: #173e37;
+  --accent: #c5a66b;
+  --line: #e3e2d9;
+  --footer: #102b28;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+  transition: background .25s, color .25s;
+}
+
+body.dark {
+  --bg: #111c1a;
+  --text: #e9eee9;
+  --surface: #192724;
+  --muted: #b0bcb5;
+  --primary: #b9d5c7;
+  --accent: #d5b67c;
+  --line: #34433d;
+  --footer: #0a1210;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+img { display: block; width: 100%; object-fit: cover; }
+section { scroll-margin-top: 90px; }
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 5%;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 1.6;
+}
+
+.logo-image {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  flex-shrink: 0;
+  background: var(--surface);
+}
+
+.logo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo small {
+  display: block;
+  margin-top: 2px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font: 28px Georgia, serif;
+}
+
+.nav { display: flex; gap: 24px; }
+.nav a { font-size: 12px; font-weight: bold; }
+.nav a:hover, .footer a:hover { color: var(--accent); }
+
+.actions { display: flex; align-items: center; gap: 8px; }
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: bold;
+  transition: transform .2s;
+}
+
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--primary); color: var(--bg); }
+.btn-outline { background: transparent; color: var(--text); border-color: var(--line); }
+
+.icon-btn, .menu-toggle {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: transparent;
+  font-size: 20px;
+}
+
+.menu-toggle { display: none; }
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 55px;
+  padding: 85px 7%;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1, h2 { font: 500 clamp(34px, 4.5vw, 60px)/1.15 Georgia, serif; }
+h1 { margin: 22px 0; }
+h2 { margin: 15px 0 22px; }
+h1 em, h2 em { color: var(--accent); }
+.hero p, .about p, .contact p { color: var(--muted); line-height: 1.9; }
+.hero p { margin-bottom: 25px; }
+
+.hero-image { height: 460px; position: relative; overflow: hidden; }
+.hero-image img { height: 100%; }
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 25px;
+  color: white;
+  background: linear-gradient(transparent, #102b28ed);
+}
+.image-caption span { display: block; font-size: 11px; }
+
+.section { padding: 85px 7%; }
+.carousel-section { background: var(--surface); border-block: 1px solid var(--line); }
+
+.carousel { overflow: hidden; }
+.carousel-track { display: flex; transition: transform .5s ease; }
+.slide { min-width: 100%; height: 400px; position: relative; }
+.slide img { height: 100%; filter: brightness(.75); }
+.slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  color: white;
+  font: 26px Georgia, serif;
+  background: linear-gradient(transparent, #102b28df);
+}
+
+.carousel-controls, .dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.carousel-controls button, .dots button {
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+}
+
+.carousel-controls button { width: 40px; height: 40px; font-size: 20px; }
+.dots { gap: 7px; }
+.dots button { width: 22px; height: 5px; }
+.dots button.active { background: var(--accent); }
+
+.section-intro { margin-bottom: 35px; }
+.section-intro p { margin-top: 10px; color: var(--muted); }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform .25s;
+}
+.card:hover { transform: translateY(-5px); }
+.card img { height: 180px; transition: transform .3s; }
+.card:hover img { transform: scale(1.04); }
+.card-content { padding: 20px; }
+.card-number { color: var(--accent); font-size: 11px; }
+.card h3 { margin: 10px 0; font: 21px Georgia, serif; }
+.card p { min-height: 85px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.card a { display: block; margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 11px; font-weight: bold; }
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
+  align-items: center;
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+.about-image img { height: 460px; }
+.about ul { list-style: none; margin: 20px 0; }
+.about li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.about li strong { color: var(--text); }
+
+.contact {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 55px;
+  align-items: start;
+}
+.contact-info p { margin: 20px 0; }
+.contact-form { padding: 30px; background: var(--surface); border: 1px solid var(--line); }
+.contact-form h3 { margin-bottom: 18px; font: 27px Georgia, serif; }
+.contact-form label { display: block; margin: 13px 0 5px; font-size: 12px; font-weight: bold; }
+.contact-form input, .contact-form textarea, .contact-form select {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 0;
+}
+.contact-form textarea { resize: vertical; }
+.contact-form .btn { width: 100%; margin-top: 20px; }
+.contact-form small { display: block; margin-top: 10px; color: var(--muted); font-size: 10px; }
+
+.footer { padding: 50px 7% 20px; background: var(--footer); color: #e8ece7; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr .7fr 1fr; gap: 45px; padding-bottom: 35px; }
+.footer h3 { margin-bottom: 15px; color: var(--accent); font-size: 10px; letter-spacing: 2px; }
+.footer p, .footer-grid > div > a:not(.logo) { display: block; margin-bottom: 9px; font-size: 12px; color: #c2cdc5; }
+.footer-brand-text { max-width: 260px; margin-top: 18px; }
+.socials { display: flex; gap: 9px; margin-top: 18px; }
+.socials a { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid #526157; font-size: 10px; }
+.footer-bottom { padding-top: 18px; border-top: 1px solid #34463e; font-size: 10px; color: #c2cdc5; }
+
+.header-photo {
+  padding: 0;
+  background: var(--bg);
+}
+
+.header-photo .photo-frame {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  display: flex;
+  justify-content: center;
+  background: var(--surface);
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+.header-photo img {
+  display: block;
+  width: 100%;
+  height: 216px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.whatsapp {
+  position: fixed;
+  z-index: 45;
+  right: 22px;
+  bottom: 22px;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #20b968;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 8px 25px #0002;
+}
+
+.customizer {
+  position: fixed;
+  z-index: 100;
+  top: 95px;
+  right: 20px;
+  width: min(320px, calc(100% - 40px));
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 15px 45px #0002;
+}
+.customizer[hidden] { display: none; }
+.customizer h3 { margin: 10px 0 20px; font: 24px Georgia, serif; }
+.customizer label { display: block; margin: 12px 0 5px; font-size: 12px; }
+.customizer input { width: 100%; height: 40px; margin-bottom: 10px; }
+.customizer .btn { width: 100%; margin-top: 8px; }
+.close-btn { float: right; border: 0; background: transparent; color: var(--text); font-size: 24px; }
+
+@media (max-width: 1050px) {
+  .header { padding-inline: 3%; gap: 10px; }
+  .nav { gap: 13px; }
+  .hero, .section { padding-inline: 5%; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card img { height: 220px; }
+  .footer { padding-inline: 5%; }
+}
+
+@media (max-width: 760px) {
+  .header { padding: 12px 18px; flex-wrap: wrap; }
+  .menu-toggle { display: block; order: 3; }
+  .header-actions { margin-left: auto; }
+  .header-actions .contact-btn { display: none; }
+  .nav { display: none; width: 100%; order: 4; flex-direction: column; gap: 0; }
+  .nav.open { display: flex; }
+  .nav a { padding: 12px 0; border-top: 1px solid var(--line); }
+  .hero, .about, .contact { grid-template-columns: 1fr; }
+  .hero { padding: 50px 22px; gap: 35px; }
+  .hero-image { height: 350px; }
+  .section { padding: 65px 22px; }
+  .slide { height: 310px; }
+  .about-image img { height: 340px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-grid > div:first-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 40px; }
+  h2 { font-size: 33px; }
+  .cards, .footer-grid { grid-template-columns: 1fr; }
+  .footer-grid > div:first-child { grid-column: auto; }
+  .card img { height: 220px; }
+  .card p { min-height: 0; }
+  .slide { height: 260px; }
+  .slide-caption { padding: 20px; font-size: 22px; }
+  .contact-form { padding: 22px; }
+  .whatsapp { right: 15px; bottom: 15px; width: 52px; height: 52px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+</style>
+</head>
+
+<body>
+<header class="header" id="topo">
+  <a href="#topo" class="logo">
+    <span class="logo-image"><img src="IMG/Imagem.jpeg" alt="Amícia Rodrigues Santos"></span>
+    <span>
+      ADVOCACIA<br>
+      <strong>RODRIGUES</strong><br>
+      <small>Amícia Rodrigues Santos</small>
+    </span>
+  </a>
+
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+
+  <nav class="nav" id="mainNav">
+    <a href="#inicio">Início</a>
+    <a href="#atuacao">Atuação</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <div class="actions">
+    <button class="icon-btn" id="themeToggle" aria-label="Alternar tema">☾</button>
+    <button class="btn btn-outline" id="customizeToggle">Cores</button>
+    <a class="btn btn-primary contact-btn" href="#contato">Fale conosco ↗</a>
+  </div>
+</header>
+
+<div class="header-photo" aria-label="Foto da advogada Amícia Rodrigues Santos">
+  <div class="photo-frame">
+    <img src="IMG/Foto.png" alt="Amícia Rodrigues Santos">
+  </div>
+</div>
+
+<aside class="customizer" id="customizer" hidden>
+  <button class="close-btn" id="closeCustomizer" aria-label="Fechar">×</button>
+  <h3>Personalizar cores</h3>
+  <label for="backgroundColor">Cor de fundo</label>
+  <input type="color" id="backgroundColor" value="#f7f5f0">
+  <label for="fontColor">Cor das fontes</label>
+  <input type="color" id="fontColor" value="#20332f">
+  <button class="btn btn-primary" id="applyColors">Aplicar cores</button>
+  <button class="btn btn-outline" id="resetColors">Restaurar padrão</button>
+</aside>
+
+<main>
+  <section class="hero" id="inicio">
+    <div>
+      <span class="eyebrow">ADVOCACIA COM PROPÓSITO</span>
+      <h1>Orientação jurídica com <em>clareza e confiança.</em></h1>
+      <p>Atendimento próximo, análise cuidadosa e compromisso com cada etapa da sua jornada jurídica.</p>
+      <a class="btn btn-primary" href="#contato">Agende uma conversa ↗</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=85" alt="Livros jurídicos e símbolo da justiça">
+      <div class="image-caption">
+        <strong>Amícia Rodrigues Santos</strong>
+        <span>Advocacia Rodrigues · Compromisso com seus direitos</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section carousel-section">
+    <div class="section-intro">
+      <span class="eyebrow">NOSSO COMPROMISSO</span>
+      <h2>Direito com propósito.<br><em>Atendimento humano.</em></h2>
+    </div>
+    <div class="carousel" id="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <article class="slide">
+          <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200&q=80" alt="Biblioteca jurídica">
+          <div class="slide-caption">Conhecimento para decisões conscientes.</div>
+        </article>
+        <article class="slide">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80" alt="Símbolo da justiça">
+          <div class="slide-caption">Seriedade em cada detalhe.</div>
+        </article>
+        <article class="slide">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80" alt="Documentos jurídicos">
+          <div class="slide-caption">Clareza em cada etapa.</div>
+        </article>
+        <article class="slide">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80" alt="Profissionais em reunião">
+          <div class="slide-caption">Uma conversa atenta começa com você.</div>
+        </article>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button id="prevSlide" aria-label="Imagem anterior">←</button>
+      <span id="slideCount">01 / 04</span>
+      <button id="nextSlide" aria-label="Próxima imagem">→</button>
+    </div>
+    <div class="dots" id="carouselDots">
+      <button class="active" aria-label="Imagem 1"></button>
+      <button aria-label="Imagem 2"></button>
+      <button aria-label="Imagem 3"></button>
+      <button aria-label="Imagem 4"></button>
+    </div>
+  </section>
+
+  <section class="section" id="atuacao">
+    <div class="section-intro">
+      <span class="eyebrow">COMO PODEMOS AJUDAR</span>
+      <h2>Orientação jurídica<br><em>para o que importa.</em></h2>
+      <p>Conheça algumas possibilidades de atendimento.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=700&q=80" alt="Documentos">
+        <div class="card-content"><span class="card-number">01</span><h3>Consultoria jurídica</h3><p>Informações para compreender direitos, deveres e caminhos possíveis.</p><a href="#contato" data-subject="Consultoria jurídica">Saiba mais ↗</a></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=700&q=80" alt="Atendimento profissional">
+        <div class="card-content"><span class="card-number">02</span><h3>Atendimento personalizado</h3><p>Escuta cuidadosa e análise individual de cada situação.</p><a href="#contato" data-subject="Atendimento personalizado">Saiba mais ↗</a></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=700&q=80" alt="Símbolo da justiça">
+        <div class="card-content"><span class="card-number">03</span><h3>Análise de documentos</h3><p>Avaliação cuidadosa de documentos e esclarecimento de dúvidas.</p><a href="#contato" data-subject="Análise de documentos">Saiba mais ↗</a></div>
+      </article>
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=700&q=80" alt="Livros jurídicos">
+        <div class="card-content"><span class="card-number">04</span><h3>Orientação sobre direitos</h3><p>Esclarecimentos iniciais para ajudar você a entender suas opções.</p><a href="#contato" data-subject="Orientação sobre direitos">Saiba mais ↗</a></div>
+      </article>
+    </div>
+    <p style="font-size:10px;color:var(--muted);margin-top:18px">Revise as áreas acima para que correspondam aos serviços efetivamente prestados.</p>
+  </section>
+
+  <section class="section about" id="sobre">
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=80" alt="Ambiente profissional">
+    </div>
+    <div class="about">
+      <div class="about-content">
+        <span class="eyebrow">NOSSA ABORDAGEM</span>
+        <h2>Mais clareza para <em>seguir em frente.</em></h2>
+        <p><strong>Amícia Rodrigues Santos</strong> conduz a abordagem com atenção, clareza e responsabilidade,priorizando a compreensão detalhada de cada caso e uma orientação jurídica objetiva.</p>
+        <p>Acreditamos que compreender sua situação é parte essencial de um atendimento jurídico responsável. Nosso compromisso é ouvir com atenção, explicar com clareza e tratar cada demanda com seriedade.</p>
+        <ul>
+          <li><strong>Escuta atenta</strong><br>Entender o contexto antes de orientar.</li>
+          <li><strong>Comunicação clara</strong><br>Explicar os próximos passos objetivamente.</li>
+          <li><strong>Responsabilidade</strong><br>Atuação ética e individualizada.</li>
+        </ul>
+        <a class="btn btn-primary" href="#contato">Vamos conversar ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contato">
+    <div class="contact-info">
+      <span class="eyebrow">FALE CONOSCO</span>
+      <h2>Vamos começar com uma <em>conversa.</em></h2>
+      <p>Entre em contato com <strong>Amícia Rodrigues Santos</strong> para apresentar sua dúvida e verificar as possibilidades de atendimento.</p>
+      <p><strong>Telefone</strong><br><a href="tel:+5511992174380">+55 11 99217-4380</a></p>
+      <p><strong>Endereço</strong><br>Rua Carmen Aguilar Perez, 53<br>CEP 06763-370</p>
+      <p><strong>Advogada</strong><br>Amícia Rodrigues Santos</p>
+      <a class="btn btn-primary" href="https://wa.me/5511992174380" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <h3>Envie sua mensagem</h3>
+      <label for="name">Seu nome</label>
+      <input id="name" name="name" required placeholder="Digite seu nome">
+      <label for="email">Seu e-mail (opcional)</label>
+      <input id="email" name="email" type="email" placeholder="voce@exemplo.com">
+      <label for="subject">Assunto</label>
+      <select id="subject" name="subject">
+        <option>Solicitar atendimento</option>
+        <option>Consultoria jurídica</option>
+        <option>Atendimento personalizado</option>
+        <option>Análise de documentos</option>
+        <option>Orientação sobre direitos</option>
+        <option>Outro assunto</option>
+      </select>
+      <label for="message">Sua mensagem</label>
+      <textarea id="message" name="message" rows="4" required placeholder="Como podemos ajudar?"></textarea>
+      <button class="btn btn-primary" type="submit">Enviar pelo WhatsApp ↗</button>
+      <small>O WhatsApp abrirá com a mensagem preenchida para você revisar e enviar.</small>
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a href="#topo" class="logo">
+        <span class="logo-image"><img src="IMG/Imagem.jpeg" alt="Amícia Rodrigues Santos"></span>
+        <span>
+          ADVOCACIA<br>
+          <strong>RODRIGUES</strong><br>
+          <small>Amícia Rodrigues Santos</small>
+        </span>
+      </a>
+      <p class="footer-brand-text">Seriedade, clareza e compromisso no atendimento jurídico por <strong>Amícia Rodrigues Santos</strong>.</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">F</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+        <a href="https://wa.me/5511992174380" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+      </div>
+    </div>
+    <div>
+      <h3>NAVEGAÇÃO</h3>
+      <a href="#inicio">Início</a>
+      <a href="#atuacao">Áreas de atuação</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div>
+      <h3>CONTATO</h3>
+      <p>Rua Carmen Aguilar Perez, 53</p>
+      <p>CEP: 06763-370</p>
+      <a href="tel:+5511992174380">+55 11 99217-4380</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Carmen+Aguilar+Perez%2C+53%2C+06763-370" target="_blank" rel="noopener noreferrer">Ver no mapa ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="currentYear"></span> Advocacia Rodrigues por Amícia Rodrigues Santos. Todos os direitos reservados.</div>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/5511992174380?text=Olá!%20Gostaria%20de%20informações%20sobre%20atendimento%20jurídico." target="_blank" rel="noopener noreferrer" aria-label="Fale pelo WhatsApp">WA</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+
+  // Menu para celular
+  const menu = $("#mainNav");
+  const menuButton = $("#menuToggle");
+
+  menuButton.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.textContent = open ? "×" : "☰";
+  });
+
+  $$("#mainNav a").forEach(link => {
+    link.addEventListener("click", () => {
+      menu.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.textContent = "☰";
+    });
+  });
+
+  // Modo claro e escuro
+  const themeButton = $("#themeToggle");
+
+  if (localStorage.getItem("ar-theme") === "dark") {
+    document.body.classList.add("dark");
+  }
+
+  function updateThemeButton() {
+    themeButton.textContent = document.body.classList.contains("dark") ? "☀" : "☾";
+    themeButton.setAttribute("aria-label",
+      document.body.classList.contains("dark") ? "Ativar modo claro" : "Ativar modo escuro");
+  }
+
+  updateThemeButton();
+
+  themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem("ar-theme",
+      document.body.classList.contains("dark") ? "dark" : "light");
+    updateThemeButton();
+  });
+
+  // Personalização de cores
+  const panel = $("#customizer");
+  const bgInput = $("#backgroundColor");
+  const textInput = $("#fontColor");
+  const defaultColors = { bg: "#f7f5f0", text: "#20332f" };
+
+  function setColors(bg, text, save = false) {
+    document.documentElement.style.setProperty("--bg", bg);
+    document.documentElement.style.setProperty("--text", text);
+    bgInput.value = bg;
+    textInput.value = text;
+
+    if (save) {
+      localStorage.setItem("ar-colors", JSON.stringify({ bg, text }));
+    }
+  }
+
+  try {
+    const saved = JSON.parse(localStorage.getItem("ar-colors") || "null");
+    if (saved && saved.bg && saved.text) setColors(saved.bg, saved.text);
+  } catch (_) {}
+
+  $("#customizeToggle").addEventListener("click", () => {
+    panel.hidden = !panel.hidden;
+  });
+
+  $("#closeCustomizer").addEventListener("click", () => {
+    panel.hidden = true;
+  });
+
+  $("#applyColors").addEventListener("click", () => {
+    setColors(bgInput.value, textInput.value, true);
+    panel.hidden = true;
+  });
+
+  $("#resetColors").addEventListener("click", () => {
+    localStorage.removeItem("ar-colors");
+    setColors(defaultColors.bg, defaultColors.text);
+  });
+
+  // Carrossel com quatro imagens
+  const track = $("#carouselTrack");
+  const slides = $$(".slide");
+  const dots = $$("#carouselDots button");
+  const counter = $("#slideCount");
+  let current = 0;
+  let timer;
+
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === current);
+      dot.setAttribute("aria-current", i === current ? "true" : "false");
+    });
+
+    counter.textContent =
+      `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+  }
+
+  function startCarousel() {
+    clearInterval(timer);
+    timer = setInterval(() => showSlide(current + 1), 5000);
+  }
+
+  $("#prevSlide").addEventListener("click", () => {
+    showSlide(current - 1);
+    startCarousel();
+  });
+
+  $("#nextSlide").addEventListener("click", () => {
+    showSlide(current + 1);
+    startCarousel();
+  });
+
+  dots.forEach((dot, i) => dot.addEventListener("click", () => {
+    showSlide(i);
+    startCarousel();
+  }));
+
+  $("#carousel").addEventListener("mouseenter", () => clearInterval(timer));
+  $("#carousel").addEventListener("mouseleave", startCarousel);
+
+  let touchStart = 0;
+  $("#carousel").addEventListener("touchstart", e => {
+    touchStart = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  $("#carousel").addEventListener("touchend", e => {
+    const delta = e.changedTouches[0].screenX - touchStart;
+    if (Math.abs(delta) > 45) {
+      showSlide(current + (delta < 0 ? 1 : -1));
+      startCarousel();
+    }
+  }, { passive: true });
+
+  showSlide(0);
+  startCarousel();
+
+  // Links dos cartões preenchem o assunto do formulário
+  $$(".card-content a").forEach(link => {
+    link.addEventListener("click", () => {
+      $("#subject").value = link.dataset.subject;
+    });
+  });
+
+  // Formulário: prepara mensagem para WhatsApp
+  $("#contactForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const subject = String(data.get("subject") || "").trim();
+    const message = String(data.get("message") || "").trim();
+
+    const text =
+      `Olá! Meu nome é ${name}.\nAssunto: ${subject}.\nMensagem: ${message}` +
+      (email ? `\nE-mail: ${email}` : "");
+
+    const url = "https://wa.me/5511992174380?text=" + encodeURIComponent(text);
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+
+  // Ano automático no rodapé
+  $("#currentYear").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
